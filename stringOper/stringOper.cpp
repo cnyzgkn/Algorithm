@@ -2,6 +2,13 @@
 #include <iostream>
 #include <assert.h>
 
+template<typename T> void swap(T& a, T&b)
+{
+	T temp = a;
+	a = b;
+	b = temp;
+}
+
 int myStrcmp(const char* str1, const char* str2)
 {
 	assert(str1 != NULL);
@@ -44,8 +51,9 @@ char* myStrcat(char* dest, const char* src)
 	assert(src != NULL);
 	assert(dest != NULL);
 	char* ret = dest;
-	while(*(dest++) != '\0')
+	while(*dest != '\0')
 	{
+		dest++;
 	}
 	while(*dest = *src)
 	{
@@ -54,6 +62,34 @@ char* myStrcat(char* dest, const char* src)
 	}
 	*dest = '\0';
 	return ret;
+}
+
+//in-place reverse using for loop
+char* reverse1(char* src)
+{
+	assert(src != NULL);
+	int len = myStrlen(src);
+	for(int i = 0; i < len/2; i++)
+	{
+		//swap
+		swap(src[i], src[len-i-1]);
+	}
+	return src;
+}
+
+//in-place reverse using while loop
+char* reverse2(char* src)
+{
+	assert(src != NULL);
+	int len = myStrlen(src);
+	char* low = src;
+	char* high = &src[len-1];
+	len /= 2;
+	while(len--)
+	{
+		swap(*low++, *high--);
+	}
+	return src;
 }
 
 int main()
@@ -75,8 +111,13 @@ int main()
 	char* str6 = "to be replaced";
 	//std::cout << "copy str1 to str6 " << myStrcpy(str1, str6) << std::endl; // error str6 in const area can't be changed
 
-	char str7[] = "to be added";
+	char *str7 = new char[100];
+	myStrcpy("to be added", str7);
 	std::cout << "add str1 to str7 " << myStrcat(str7, str1) << std::endl;
+
+	char str8[] = "please reverse me!";
+	std::cout << "after reverse " << reverse1(str8) << std::endl;
+	std::cout << "after reverse again " << reverse2(str8) << std::endl;
 
 	return 1;
 }
