@@ -58,12 +58,12 @@ GEdge* Graph::addEdge(GVertex* V1, GVertex* V2, void* AppData)
 }
 
 // Depth first searching
-void Graph::dfsVisit(GVertex*		vertex, 
+void Graph::dfsVisit(GVertex*			vertex, 
 						int*			color,
 						int*			d,
 						int*			low,
 						int*			numChildren,
-						GVertex**	pred,
+						GVertex**		pred,
 						int&			time,
 						std::vector<GEdge*>&	edgeStack)
 {

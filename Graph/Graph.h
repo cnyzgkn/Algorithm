@@ -1,3 +1,5 @@
+#ifndef GRAPH_H
+#define GRAPH_H
 #include <stdlib.h>
 #include <vector>
 
@@ -9,6 +11,7 @@ public:
 	GVertex();
 	GVertex(int, void*);
 	GEdge* getEdge(GVertex*); 
+	std::vector<GVertex*>& neighbVertices() {retrn mNeighbVertices};
 	friend class GEdge;
 	friend class Graph;
 
@@ -45,17 +48,20 @@ public:
 	};
 	GVertex* addVertex(int, void*);
 	GEdge* addEdge(GVertex*, GVertex*, void*);
-	void dfsVisit(GVertex*, 
-		int*,
-		int*,
-		int*,
-		int*,
-		GVertex**,
-		int&,
-		std::vector<GEdge*>&);
+	void dfsVisit(  VCSGVertex*		vertex, 
+					int*			color,
+					int*			d,
+					int*			low,
+					int*			numChildren,
+					VCSGVertex**	pred,
+					int&			time,
+					VCSCollection&	edgeStack);
+	void dfsAlgorithm();
 	int numEdges() {return mEdges.size();}
 
 private:
 	std::vector<GVertex*> mVertices;
 	std::vector<GEdge*> mEdges; 
 };
+
+#endif

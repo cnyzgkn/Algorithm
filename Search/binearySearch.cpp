@@ -30,11 +30,14 @@ int binearySearchRecursive(const int array[], int begin, int end, int element)
 		return begin;
 
 	int middle = (begin + end)/2;
-	if(element < array[middle])
+	if(element >= array[begin] && element < array[middle])
 		return binearySearchRecursive(array, begin, middle-1, element);
-	else if (element > array[middle])
+	else if(element > array[middle] && element <= array[end])
 		return binearySearchRecursive(array, middle+1, end, element);
-	else return middle;
+	else if(element < array[begin] || element > array[end]) 
+		return -1;
+	else 
+		return middle;
 
 	return -1;
 }
@@ -45,6 +48,6 @@ int main()
 	int m = binearySearchLoop(array, 0, 9, 70);
 	std::cout << "n = " << m << std::endl;
 
-	int n = binearySearchRecursive(array, 0, 9, 70);
+	int n = binearySearchRecursive(array, 0, 9, 110);
 	std::cout << "n = " << n << std::endl;
 }
