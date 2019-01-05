@@ -82,13 +82,14 @@ GVertex* GGraph::addVertex(int index, void* AppData)
 	return v;
 }
 
-GEdge* GGraph::addEdge(GVertex* V1, GVertex* V2, void* AppData)
+GEdge* GGraph::addEdge(GVertex* V1, GVertex* V2, double weight, void* AppData)
 {
 	if(V1 != V2)
 	{
 		GEdge* edge = V1->getEdge(V2);
 		if(edge == NULL) {
 			edge = new GEdge(V1, V2, AppData);
+			edge->setWeight(weight);
 			append(edge);
 		}
 		return edge;

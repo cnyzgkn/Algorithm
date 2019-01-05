@@ -76,10 +76,12 @@ void GVertex::setDist(double dist) {
 GEdge* GVertex::getEdge(GVertex* v)
 {
 	auto iter = mEdges.begin();
-	while(iter++ != mEdges.end())
+	while(iter != mEdges.end())
 	{
-		if(v == (*iter)->opposite(this))
-			return *iter;
+		auto oldIter = iter;
+		++iter;
+		if(v == (*oldIter)->opposite(this))
+			return *oldIter;
 	}
 	return NULL;
 }

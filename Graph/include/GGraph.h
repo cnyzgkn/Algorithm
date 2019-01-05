@@ -20,7 +20,7 @@ public:
 	~GGraph();
 	
 	GVertex* addVertex(int index, void* AppData = NULL);
-	GEdge* addEdge(GVertex* V1, GVertex* V2, void* AppData = NULL);	
+	GEdge* addEdge(GVertex* V1, GVertex* V2, double weight = 0, void* AppData = NULL);	
 
 	void computeBiConnectedSets();	
 
