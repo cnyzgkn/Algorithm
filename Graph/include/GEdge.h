@@ -9,7 +9,7 @@ class GBiConnectedSet;
 class GEdge
 {
 public:
-	GEdge(GVertex*, GVertex*, void*);
+	GEdge(GVertex* V1, GVertex* V2, void* AppData = NULL);
 	GVertex* v1();
 	GVertex* v2();
 	GVertex* opposite(GVertex*);

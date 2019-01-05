@@ -10,7 +10,7 @@ class GVertex
 {
 public:
 	GVertex();
-	GVertex(int, void*);
+	GVertex(int index, void* AppData = NULL);
 
 	std::vector<GVertex*>& neighbVertices();
 	std::vector<GEdge*>& edges();
@@ -37,8 +37,8 @@ private:
 	std::vector<GEdge*> mEdges;
 	void* mAppData;
 	double mWeight;
-	GVertex* mPrevious;
-	double mDist;
+	GVertex* mPrevious; // used in shortest path finding
+	double mDist; // used in shortest path finding
 };
 
 #endif

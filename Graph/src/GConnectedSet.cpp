@@ -1,16 +1,16 @@
 #include "GConnectedSet.h"
 
-using namepsace std;
+using namespace std;
 
-void GConnectedSet::setGraph(Graph* g) {
+void GConnectedSet::setGraph(GGraph* g) {
     mGraph = g;
 }
 
-Graph* GConnectedSet::getOwingGraph() {
+GGraph* GConnectedSet::getOwingGraph() {
     return mGraph;
 }
 
-Collection& GConnectedSet::biConnectedSets() {
+std::vector<GBiConnectedSet*>& GConnectedSet::biConnectedSets() {
     return mBiConnectedSets;
 }
 
@@ -20,6 +20,6 @@ GConnectedSet::GConnectedSet()
 }
 
 void GConnectedSet::append(GBiConnectedSet* b) {
-    mBiConnectedSets.append(b);
+    mBiConnectedSets.push_back(b);
     b->setConnectedSet(this);
 }

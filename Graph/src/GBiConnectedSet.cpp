@@ -1,7 +1,13 @@
 #include "GBiConnectedSet.h"
 #include "GConnectedSet.h"
+#include "GEdge.h"
 
 using namespace std;
+
+GBiConnectedSet::GBiConnectedSet()
+: mConnectedSet(NULL), mAppData(NULL)
+{
+}
 
 GBiConnectedSet::GBiConnectedSet(GVertex* v)
 : mConnectedSet(NULL), mAppData(NULL)
@@ -13,7 +19,7 @@ void GBiConnectedSet::setConnectedSet(GConnectedSet* c) {
     mConnectedSet = c;
 }
 
-Collection& GBiConnectedSet::edges() {
+vector<GEdge*>& GBiConnectedSet::edges() {
     return mEdges;
 }
 

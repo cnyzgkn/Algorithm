@@ -1,5 +1,5 @@
-#include "stdafx.h"
 #include "GVertex.h"
+#include "GEdge.h"
 
 using namespace std;
 
@@ -9,7 +9,7 @@ GVertex::GVertex()
 }
 
 GVertex::GVertex(int index, void* AppData)
-	: mIndex(index), mAppData(AppData), mAppData(AppData)
+	: mIndex(index), mArtiPoint(false), mAppData(AppData)
 {
 	mWeight = 0;
 	mPrevious = NULL;
@@ -17,11 +17,11 @@ GVertex::GVertex(int index, void* AppData)
 }
 
 
-Collection& GVertex::neighbVertices() {
+std::vector<GVertex*>& GVertex::neighbVertices() {
 	return mNeighbVertices;
 }
 
-Collection& GVertex::edges() {
+std::vector<GEdge*>& GVertex::edges() {
 	return mEdges;
 }
 
@@ -84,9 +84,9 @@ GEdge* GVertex::getEdge(GVertex* v)
 	return NULL;
 }
 
-std::vector<GBiConnectedSet> GVertex::getBiConnectedSets() 
+std::vector<GBiConnectedSet*> GVertex::getBiConnectedSets() 
 {
-    vector<GBiConnectedSet> biSets;
+    vector<GBiConnectedSet*> biSets;
 
     GEdge* edge = NULL;
     auto iter = mEdges.begin();

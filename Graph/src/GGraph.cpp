@@ -33,6 +33,16 @@ GGraph::~GGraph() {
 	clearBiConnSet();
 }
 
+std::vector<GVertex*>& GGraph::vertices()
+{
+	return mVertices;
+}
+
+std::vector<GEdge*>& GGraph::edges()
+{
+	return mEdges;
+}
+
 void GGraph::clearConnSet() {
     if (!mConnectedSets.empty()) {
         auto iter = mConnectedSets.begin();
@@ -41,6 +51,16 @@ void GGraph::clearConnSet() {
 			++iter;
 		}
     }
+}
+
+void GGraph::clearBiConnSet() {
+	if (!mBiConnectedSets.empty()) {
+		auto iter = mBiConnectedSets.begin();
+		while (iter != mBiConnectedSets.end()) {
+			delete *iter;
+			++iter;
+		}
+	}
 }
 
 void GGraph::clearArtiPoints() {
@@ -122,6 +142,46 @@ void GGraph::addNewConnSet(GBiConnectedSet* toBiConnSet)
     }
 
     append(newConnSet);
+}
+
+void GGraph::printGraph() {
+	FILE* file = fopen("_graph.txt", "w");
+
+    fprintf(file, "// Found %d connected sets\n\n", (int)mConnectedSets.size());
+	fprintf(file, "// Found %d articulation points and %d bi-connected sets\n\n", (int)mArtiPoints.size(), (int)mBiConnectedSets.size());
+
+	fprintf(file, "\n\n graph A {\n node[shape=\"circle\"]\n");
+
+	fprintf(file, "// articulation points \n");
+	GVertex* vertex = NULL;
+	auto vIter = mArtiPoints.begin();
+	while (vIter != mArtiPoints.end()) {
+		fprintf(file, " \"%d\" [ style = \"filled\", color=\"red\" ];\n", (*vIter)->index());
+		++vIter;
+	}
+
+    auto cnIter = mConnectedSets.begin();
+    int cnID = 0;
+    while (cnIter != mConnectedSets.end()) {
+        auto sIter = (*cnIter)->biConnectedSets().begin();
+        int biID = 0;
+        while (sIter != (*cnIter)->biConnectedSets().end()) {
+            auto eIter = (*sIter)->edges().begin();
+            while (eIter != (*sIter)->edges().end()) {
+                fprintf(file, "%d -- %d [label=\"%d(%d)\"] \n", (*eIter)->v1()->index(), (*eIter)->v2()->index(), cnID, biID);
+                ++eIter;
+            }
+
+            ++biID;
+            ++sIter;
+        }
+
+        ++cnID;
+        ++cnIter;
+    }
+
+	fprintf (file, " }\n");
+	fclose(file);
 }
 
 // Depth first searching

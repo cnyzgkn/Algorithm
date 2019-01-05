@@ -23,7 +23,7 @@ public:
 	void setAppData(void*);
 
 private:
-    std::vector<GConnectedSet*> mConnectedSet;      // which connected set this bi-connected set is in?
+    GConnectedSet* mConnectedSet;      // which connected set this bi-connected set is in?
     std::vector<GEdge*> mEdges;             // the edges in this bi-connected set
     std::vector<GVertex*> mVertices;          // vertices in this bi-connected set, is computed from the edges
     std::vector<GVertex*> mArtiPoints;        // articulation points in this bi-connected set, is computed from the edges

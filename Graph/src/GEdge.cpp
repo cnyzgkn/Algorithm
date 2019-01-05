@@ -1,10 +1,12 @@
 #include "GEdge.h"
+#include <assert.h>
 
 using namespace std;
 
 GEdge::GEdge(GVertex* V1, GVertex* V2, void* AppData)
 	:mV1(V1), mV2(V2), mAppData(AppData), mBiSet(NULL)
 {
+	assert(V1 != V2);
 	mV1->neighbVertices().push_back(mV2);
 	mV2->neighbVertices().push_back(mV1);
 	mV1->edges().push_back(this);

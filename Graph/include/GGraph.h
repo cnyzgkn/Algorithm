@@ -6,6 +6,7 @@
 #include "GBiConnectedSet.h"
 #include "GConnectedSet.h"
 #include <vector>
+#include "stdio.h"
 
 class GGraph {
 public:
@@ -18,8 +19,8 @@ public:
 	GGraph();
 	~GGraph();
 	
-	GVertex* addVertex(int, void*);
-	GEdge* addEdge(GVertex*, GVertex*, void*);	
+	GVertex* addVertex(int index, void* AppData = NULL);
+	GEdge* addEdge(GVertex* V1, GVertex* V2, void* AppData = NULL);	
 
 	void computeBiConnectedSets();	
 
